@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b5cab">
+  <meta name="description" content="Portal interno para llamar al Centro de Atención mediante Cisco Webex.">
+  <title>Centro de Atención | Webex</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #0875d1;
+      --blue-hover: #075ba3;
+      --text: #172b4d;
+      --muted: #5b6575;
+      --background: #f3f6fa;
+      --card: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .panel {
+      width: 100%;
+      max-width: 460px;
+      padding: 36px 28px;
+      background: var(--card);
+      border: 1px solid #e4eaf1;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 10px 34px rgba(23, 43, 77, .08);
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      border-radius: 20px;
+      background: #e8f3ff;
+      color: var(--blue);
+      font-size: 36px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(23px, 5vw, 28px);
+      line-height: 1.2;
+    }
+
+    .description {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .call-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 56px;
+      margin-top: 26px;
+      padding: 16px 20px;
+      border: 0;
+      border-radius: 11px;
+      background: var(--blue);
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .18s ease, transform .18s ease;
+    }
+
+    .call-button:hover { background: var(--blue-hover); }
+    .call-button:active { transform: translateY(1px); }
+    .call-button:focus-visible {
+      outline: 3px solid #83c2ff;
+      outline-offset: 3px;
+    }
+
+    .note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .status {
+      min-height: 20px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 22px;
+      color: #7a8493;
+      font-size: 11px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <div class="brand-mark" aria-hidden="true">☎</div>
+    <h1>Centro de Atención</h1>
+    <p class="description">
+      Comunicate con nuestro equipo de atención mediante Cisco Webex.
+    </p>
+
+    <a class="call-button" href="clicktocall:9672" id="call-button">
+      <span aria-hidden="true">📞</span>
+      Llamar a Atención
+    </a>
+
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <p class="note">
+      Se intentará abrir Webex App. Según la configuración del equipo,
+      el navegador puede pedirte autorización para abrir la aplicación.
+    </p>
+    <footer>Portal interno de llamadas</footer>
+  </main>
+
+  <script>
+    // Destino configurado para la cola de atención.
+    // Si se cambia el destino, actualizar también el enlace en el HTML.
+    const callButton = document.getElementById("call-button");
+    const status = document.getElementById("status");
+
+    callButton.addEventListener("click", () => {
+      status.textContent = "Solicitando abrir Webex App…";
+    });
+  </script>
+</body>
+</html>
